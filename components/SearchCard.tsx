@@ -5,7 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
@@ -14,7 +14,11 @@ interface SearchCardProps {
   onSearchChange: (text: string) => void;
 }
 
+import { DisplayCopyBtnContext } from "../App";
+
 const SearchCard = ({ value, onSearchChange }: SearchCardProps) => {
+  const show = useContext(DisplayCopyBtnContext);
+
   return (
     <View style={styles.card}>
       <View style={styles.addressSearch}>
@@ -53,57 +57,60 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     margin: 10,
-    maxWidth: "95%",
-    minWidth: "90%",
+    width: "95%",
     height: "auto",
     alignItems: "center",
-
     justifyContent: "center",
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingHorizontal: 5,
+    paddingVertical: 5,
     borderWidth: 1,
     borderColor: "#838383",
     borderStyle: "solid",
     borderRadius: 8,
     backgroundColor: "#52565a",
-    // overflow:"hidden"
+    alignSelf: "flex-start",
   },
 
   addressSearch: {
     flexDirection: "row",
     marginVertical: 5,
-    borderWidth: 1,
-    borderColor: "#ffff",
-    // marginLeft: "10%",
-    // marginRight: "10%",
-    width: "auto",
-    height: "auto",
+    borderWidth: 0.3,
+    borderStyle: "dotted",
+    borderColor: "#ffffff",
     borderRadius: 50,
-    alignSelf: "center",
+    maxWidth: "85%",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 
   addressInput: {
     fontFamily: "monospace",
     fontSize: 12,
     color: "#ada9a5",
-    marginLeft: 20,
-    width: "auto",
+    marginLeft: 10,
+    width: "80%",
   },
 
   iconSearch: {
-    backgroundColor: "#3f8bb8",
-    padding: 10,
+    backgroundColor: "#14F195",
+    paddingVertical: 8,
+    paddingHorizontal: 10,
     borderRadius: 50,
+    borderWidth: 0.3,
+    borderColor: "#ada9a5",
+    borderStyle: "dotted",
   },
-  
+
   iconCopy: {
-    backgroundColor: "red",
-    padding: 10,
+    backgroundColor: "#A9AAB0",
+    paddingVertical: 8,
+    paddingHorizontal: 10,
     borderRadius: 50,
-    borderWidth: 1,
+    borderWidth: 0.3,
     borderColor: "#ffff",
-    // display: "none"
-    marginLeft: 10
+    marginLeft: 10,
+    borderStyle: "dotted",
+    // display: "none",
   },
 });
 
