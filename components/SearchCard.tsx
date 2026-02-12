@@ -14,14 +14,11 @@ interface SearchCardProps {
   onSearchChange: (text: string) => void;
 }
 
-import { DisplayCopyBtnContext } from "../App";
-
 const SearchCard = ({ value, onSearchChange }: SearchCardProps) => {
-  const show = useContext(DisplayCopyBtnContext);
-
   return (
     <View style={styles.card}>
       <View style={styles.addressSearch}>
+        {/* Address input */}
         <TextInput
           style={styles.addressInput}
           placeholder="Solana wallet address..."
@@ -31,6 +28,7 @@ const SearchCard = ({ value, onSearchChange }: SearchCardProps) => {
           autoCapitalize="none"
           autoCorrect={false}
         />
+        {/* Search button */}
         <TouchableOpacity>
           <FontAwesome
             style={styles.iconSearch}
@@ -40,6 +38,8 @@ const SearchCard = ({ value, onSearchChange }: SearchCardProps) => {
           />
         </TouchableOpacity>
       </View>
+      {/* copy address button */}
+      {/* displayed if address.length >= 30  */}
       <TouchableOpacity>
         <AntDesign
           style={styles.iconCopy}

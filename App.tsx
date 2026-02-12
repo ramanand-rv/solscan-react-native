@@ -7,8 +7,10 @@ import {
   SafeAreaView,
   TextInput,
 } from "react-native";
-import { useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import SearchCard from "./components/SearchCard";
+import { SwapScreen } from "./components/SwapScreen";
 
 const RPC = "http://api.mainnet-beta.solana.com";
 
@@ -71,20 +73,10 @@ export default function App() {
   return (
     <SafeAreaProvider style={styles.container}>
       <ScrollView>
-        <View style={styles.card}>
-          <TextInput
-            style={styles.addressInput}
-            placeholder="Solana wallet address..."
-            placeholderTextColor="#555"
-            value={address}
-            onChangeText={setAddress}
-            autoCapitalize="none"
-            autoCorrect={false}
-          />
+        {/* Search component */}
+        <View style={styles.searchComponent}>
+          <SearchCard value={address} onSearchChange={setAddress} />
         </View>
-
-        <View></View>
-        <View></View>
       </ScrollView>
     </SafeAreaProvider>
   );
@@ -93,29 +85,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#32363a",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#1E1E1E",
   },
-
-  card: {
-    // flex: 1,
-
-    margin: 10,
-    maxWidth: "90%",
-    height: "auto",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    alignContent: "center",
-    justifyContent: "center",
-    borderWidth: 1,
-    borderColor: "#838383",
-    borderStyle: "solid",
-    borderRadius: 8,
-    backgroundColor: "#52565a",
+  searchComponent: {
+    top: 100,
   },
-
-  addressInput: {
-    
-  }
 });
