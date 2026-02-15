@@ -8,9 +8,14 @@ import {
   TextInput,
 } from "react-native";
 import { createContext, useContext, useEffect, useState } from "react";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
 import SearchCard from "../../components/SearchCard";
+import Title from "../../components/Title";
+import SolBalanceCard from "../../components/SolBalanceCard";
 
 const RPC = "http://api.mainnet-beta.solana.com";
 
@@ -70,12 +75,24 @@ export default function App() {
   const [tokens, setTokens] = useState<any[]>([]);
   const [txns, setTxns] = useState<any[]>([]);
 
+  const inset = useSafeAreaInsets();
+
   return (
     <SafeAreaProvider style={styles.container}>
-      <ScrollView>
+      <ScrollView style={[styles.scroll, { top: inset.top }]}>
+        {/* Title component */}
+        <View style={styles.titleComponent}>
+          <Title title="Solscan" subtitle="Explore any Solana wallet" />
+        </View>
+
         {/* Search component */}
         <View style={styles.searchComponent}>
           <SearchCard value={address} onSearchChange={setAddress} />
+        </View>
+
+        {/* Sol balance card */}
+        <View>
+          <SolBalanceCard address="xyzasdasmnaasmncddaklsjd" balance="123456789" />
         </View>
       </ScrollView>
     </SafeAreaProvider>
@@ -87,7 +104,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#1E1E1E",
   },
-  searchComponent: {
-    top: 100,
+
+  scroll: {
+    marginHorizontal: 5,
   },
+
+  searchComponent: {},
+
+  titleComponent: {},
 });
