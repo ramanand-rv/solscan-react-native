@@ -8,6 +8,7 @@ import {
 import React, { useContext } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 interface SearchCardProps {
   value: string;
@@ -16,7 +17,7 @@ interface SearchCardProps {
 
 const SearchCard = ({ value, onSearchChange }: SearchCardProps) => {
   return (
-    <View style={styles.card}>
+    <SafeAreaView style={styles.card}>
       <View style={styles.addressSearch}>
         {/* Address input */}
         <TextInput
@@ -48,7 +49,7 @@ const SearchCard = ({ value, onSearchChange }: SearchCardProps) => {
           color="#ffffff"
         />
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     borderColor: "#838383",
     borderStyle: "solid",
     borderRadius: 8,
-    backgroundColor: "#52565a",
+    backgroundColor: "#001e3d",
     alignSelf: "flex-start",
   },
 
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
     borderColor: "#ffff",
     marginLeft: 10,
     borderStyle: "dotted",
-    // display: "none",
+    display: "none",
   },
 });
 
