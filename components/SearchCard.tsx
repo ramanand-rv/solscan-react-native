@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import React, { useContext } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -29,26 +30,30 @@ const SearchCard = ({ value, onSearchChange }: SearchCardProps) => {
           autoCapitalize="none"
           autoCorrect={false}
         />
+      </View>
+      <View style={styles.buttonsContainer}>
         {/* Search button */}
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.searchBtn}>
           <FontAwesome
             style={styles.iconSearch}
             name="search"
             size={24}
             color="#ffffff"
           />
+          <Text style={styles.btnText}>Search</Text>
+        </TouchableOpacity>
+        {/* copy address button */}
+        {/* displayed if address.length >= 30  */}
+        <TouchableOpacity style={styles.copyBtn}>
+          <AntDesign
+            style={styles.iconCopy}
+            name="copy"
+            size={24}
+            color="#ffffff"
+          />
+          <Text style={styles.btnText}>Copy</Text>
         </TouchableOpacity>
       </View>
-      {/* copy address button */}
-      {/* displayed if address.length >= 30  */}
-      <TouchableOpacity>
-        <AntDesign
-          style={styles.iconCopy}
-          name="copy"
-          size={24}
-          color="#ffffff"
-        />
-      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -56,62 +61,68 @@ const SearchCard = ({ value, onSearchChange }: SearchCardProps) => {
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    flexDirection: "row",
-    margin: 10,
-    width: "95%",
-    height: "auto",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 5,
-    paddingVertical: 5,
-    borderWidth: 1,
-    borderColor: "#838383",
-    borderStyle: "solid",
-    borderRadius: 8,
-    backgroundColor: "#001e3d",
-    alignSelf: "flex-start",
+    backgroundColor: "transparent",
+    marginHorizontal: 5,
   },
 
   addressSearch: {
-    flexDirection: "row",
-    marginVertical: 5,
-    borderWidth: 0.3,
+    borderWidth: 1,
     borderStyle: "dotted",
-    borderColor: "#ffffff",
-    borderRadius: 50,
-    maxWidth: "85%",
-    justifyContent: "space-between",
-    alignItems: "center",
+    borderColor: "#6B7280",
+    borderRadius: 12,
+    backgroundColor: "#16161D",
   },
 
   addressInput: {
     fontFamily: "monospace",
     fontSize: 12,
-    color: "#ada9a5",
-    marginLeft: 10,
-    width: "80%",
+    color: "rgba(235, 235, 245, 0.6)",
+    padding: 20,
+  },
+
+  buttonsContainer: {
+    flexDirection: "row",
+    gap: 12,
+    marginTop: 14,
+    alignItems: "center",
+  },
+
+  searchBtn: {
+    flex: 3,
+    flexDirection: "row",
+    backgroundColor: "#14F195",
+    paddingVertical: 16,
+    paddingHorizontal: 10,
+    justifyContent: "center",
+    gap: 10,
+    alignItems: "center",
+    borderRadius: 12,
+  },
+
+  copyBtn: {
+    flex: 1.5,
+    flexDirection: "row",
+    backgroundColor: "#A9AAB0",
+    paddingVertical: 16,
+    paddingHorizontal: 10,
+    justifyContent: "center",
+    gap: 10,
+    alignItems: "center",
+    borderRadius: 12,
+  },
+
+  btnText: {
+    fontSize: 16,
+    color: "#000000",
+    fontWeight: 400,
   },
 
   iconSearch: {
-    backgroundColor: "#14F195",
-    paddingVertical: 8,
-    paddingHorizontal: 10,
-    borderRadius: 50,
-    borderWidth: 0.3,
-    borderColor: "#ada9a5",
-    borderStyle: "dotted",
+    color: "#000000",
   },
 
   iconCopy: {
-    backgroundColor: "#A9AAB0",
-    paddingVertical: 8,
-    paddingHorizontal: 10,
-    borderRadius: 50,
-    borderWidth: 0.3,
-    borderColor: "#ffff",
-    marginLeft: 10,
-    borderStyle: "dotted",
-    display: "none",
+    color: "#000000",
   },
 });
 
