@@ -5,8 +5,9 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from "react-native";
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -17,6 +18,14 @@ interface SearchCardProps {
 }
 
 const SearchCard = ({ value, onSearchChange }: SearchCardProps) => {
+  const [loading, setLoading] = useState(false);
+
+  const searchAddress = () => {
+    const addr = value.trim();
+    if (!addr) return Alert.alert("Enter a wallet address");
+    setLoading(true);
+  };
+
   return (
     <SafeAreaView style={styles.card}>
       <View style={styles.addressSearch}>
@@ -33,7 +42,7 @@ const SearchCard = ({ value, onSearchChange }: SearchCardProps) => {
       </View>
       <View style={styles.buttonsContainer}>
         {/* Search button */}
-        <TouchableOpacity style={styles.searchBtn}>
+        <TouchableOpacity style={styles.searchBtn} onPress={searchAddress}>
           <FontAwesome
             style={styles.iconSearch}
             name="search"
@@ -42,6 +51,7 @@ const SearchCard = ({ value, onSearchChange }: SearchCardProps) => {
           />
           <Text style={styles.btnText}>Search</Text>
         </TouchableOpacity>
+
         {/* copy address button */}
         {/* displayed if address.length >= 30  */}
         <TouchableOpacity style={styles.copyBtn}>
