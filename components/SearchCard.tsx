@@ -4,27 +4,35 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  ScrollView,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import React, { useState } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { getBalance, getTokens, getTxns } from "../lib/sol";
 
 interface SearchCardProps {
-  value: string;
-  onSearchChange: (text: string) => void;
+  address: string;
+  onAddressChange: (text: string) => void;
+  loading: boolean;
+  onSearch: () => void;
 }
 
-const SearchCard = ({ value, onSearchChange }: SearchCardProps) => {
-  const [loading, setLoading] = useState(false);
-
-  const searchAddress = () => {
-    const addr = value.trim();
-    if (!addr) return Alert.alert("Enter a wallet address");
-    setLoading(true);
+const SearchCard = ({
+  address,
+  onAddressChange,
+  onSearch,
+  loading,
+}: SearchCardProps) => {
+  const handleLongPressDemo = () => {
+    const testAddress = "4S93Yqn6yU15NYJZfC1ihAVvdnsxoRMD7X3Z4Dx59soU";
+    onAddressChange(testAddress);
+    onSearch;
   };
+
+  const handleCopyToClipboard = () => {};
 
   return (
     <SafeAreaView style={styles.card}>
@@ -34,27 +42,43 @@ const SearchCard = ({ value, onSearchChange }: SearchCardProps) => {
           style={styles.addressInput}
           placeholder="Solana wallet address..."
           placeholderTextColor="#ffffff"
-          value={value}
-          onChangeText={onSearchChange}
+          value={address}
+          onChangeText={onAddressChange}
           autoCapitalize="none"
           autoCorrect={false}
         />
       </View>
       <View style={styles.buttonsContainer}>
         {/* Search button */}
-        <TouchableOpacity style={styles.searchBtn} onPress={searchAddress}>
-          <FontAwesome
-            style={styles.iconSearch}
-            name="search"
-            size={24}
-            color="#ffffff"
-          />
-          <Text style={styles.btnText}>Search</Text>
+        <TouchableOpacity
+          style={styles.searchBtn}
+          onPress={onSearch}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator color="#000000" />
+          ) : (
+            <View
+              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
+            >
+              <FontAwesome
+                style={styles.iconSearch}
+                name="search"
+                size={24}
+                color="#ffffff"
+              />
+              <Text style={styles.btnText}>Search</Text>
+            </View>
+          )}
         </TouchableOpacity>
 
         {/* copy address button */}
         {/* displayed if address.length >= 30  */}
-        <TouchableOpacity style={styles.copyBtn}>
+        <TouchableOpacity
+          style={styles.copyBtn}
+          onLongPress={handleLongPressDemo}
+          onPress={handleCopyToClipboard}
+        >
           <AntDesign
             style={styles.iconCopy}
             name="copy"
@@ -104,8 +128,6 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 10,
     justifyContent: "center",
-    gap: 10,
-    alignItems: "center",
     borderRadius: 12,
   },
 
