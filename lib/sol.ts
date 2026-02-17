@@ -20,7 +20,7 @@ export const getTokens = async (addr: string) => {
   const result = await rpc("getTokenAccountsByOwner", [
     addr,
     { programId: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" },
-    { endcoding: "jsonParsed" },
+    { encoding: "jsonParsed" },
   ]);
   return (result.value || [])
     .map((a: any) => ({
@@ -31,7 +31,7 @@ export const getTokens = async (addr: string) => {
 };
 
 export const getTxns = async (addr: string) => {
-  const sigs = await rpc("getSignaturesForAdress", [addr, { limit: 10 }]);
+  const sigs = await rpc("getSignaturesForAddress", [addr, { limit: 10 }]);
   return sigs.map((s: any) => ({
     sig: s.signature,
     time: s.blockTime,

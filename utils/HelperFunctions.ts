@@ -3,9 +3,9 @@ export const shortAddress = (address: string, charsToShow: number = 4) => {
 };
 
 export const timeAgo = (ts: number) => {
-  const s = Math.floor(Date.now() / 1000 - ts);
-  if (s < 60) return `${s}s ago`;
-  if (s < 3600) return `${Math.floor(s / 60)}m ago`;
-  if (s < 86400) return `${Math.floor(s / 3600)}h ago`;
-  return `${Math.floor(s / 86400)}d ago`;
+  const sec = Math.floor(Date.now() / 1000 - ts);
+  if (sec < 60) return `${sec}s ago`;
+  if (sec < 3600) return `${Math.floor(sec / 60)}m ago`;
+  if (sec < 86400) return `${Math.floor(sec / 3600)}h ago`;
+  return `${Math.floor(sec / 86400)}d ago`;
 };
