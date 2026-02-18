@@ -1,5 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import { ScrollView, StyleSheet, Text, View, TextInput } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Alert,
+} from "react-native";
 import { useState } from "react";
 import {
   SafeAreaProvider,
@@ -9,14 +16,39 @@ import {
 import SearchCard from "../../components/SearchCard";
 import Title from "../../components/Title";
 import SolBalanceCard from "../../components/SolBalanceCard";
+import { getBalance, getTokens, getTxns } from "../../lib/sol";
+import TokensCard from "../../components/TokensCard";
+import TransactionCard from "../../components/TransactionsCard";
 
 export default function App() {
   const [address, setAddress] = useState("");
+  const [loading, setLoading] = useState(false);
   const [balance, setBalance] = useState<number | null>(null);
   const [tokens, setTokens] = useState<any[]>([]);
   const [txns, setTxns] = useState<any[]>([]);
 
   const inset = useSafeAreaInsets();
+
+  const searchAddress = async () => {
+    const walletAddress = address.trim();
+    if (!walletAddress) return Alert.alert("Enter a wallet address");
+    setLoading(true);
+
+    try {
+      const [balanceData, tokensData, transactionsData] = await Promise.all([
+        getBalance(walletAddress),
+        getTokens(walletAddress),
+        getTxns(walletAddress),
+      ]);
+      setBalance(balanceData);
+      setTokens(tokensData);
+      setTxns(transactionsData);
+    } catch (error: any) {
+      Alert.alert("Error", error.message);
+    }
+    setLoading(false);
+    console.log(txns);
+  };
 
   return (
     <SafeAreaProvider style={styles.container}>
@@ -29,17 +61,26 @@ export default function App() {
         {/* Search component */}
         <View style={styles.searchComponent}>
           <SearchCard
-            value={address}
-            onSearchChange={setAddress}
+            address={address}
+            onAddressChange={setAddress}
+            onSearch={searchAddress}
+            loading={loading}
           />
         </View>
 
         {/* Sol balance card */}
         <View style={styles.balanceCard}>
-          <SolBalanceCard
-            address="xyzasdasmnaasmncddaklsjd"
-            balance={1234.567856789}
-          />
+          <SolBalanceCard address={address} balance={balance ? balance : 0.0} />
+        </View>
+
+        {/* Tokens card */}
+        <View>
+          <TokensCard tokens={tokens} />
+        </View>
+
+        {/* Recent transactions */}
+        <View>
+          <TransactionCard transactions={txns} />
         </View>
       </ScrollView>
     </SafeAreaProvider>
