@@ -27,7 +27,7 @@ const SearchCard = ({
   loading,
 }: SearchCardProps) => {
   const handleLongPressDemo = () => {
-    const testAddress = "4S93Yqn6yU15NYJZfC1ihAVvdnsxoRMD7X3Z4Dx59soU";
+    const testAddress = "3xqUaVuAWsppb8yaSPJ2hvdvfjteMq2EbdCc3CLguaTE";
     onAddressChange(testAddress);
     onSearch;
   };

@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { shortAddress } from "../utils/HelperFunctions";
 
 interface SolBalanceProps {
-  balance: number;
+  balance: number | null;
   address: string;
 }
 
@@ -13,7 +13,7 @@ export default function SolBalanceCard({ balance, address }: SolBalanceProps) {
     <SafeAreaView style={styles.safe}>
       <Text style={styles.balanceLabel}>SOL BALANCE</Text>
       <View style={styles.balanceContainer}>
-        <Text style={styles.balanceFigure}>{balance.toFixed(6)}</Text>
+        <Text style={styles.balanceFigure}>{balance?.toFixed(6)}</Text>
         <Text style={styles.balanceUnit}>SOL</Text>
       </View>
       <View style={styles.addressContainer}>
