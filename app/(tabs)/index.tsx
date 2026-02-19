@@ -47,7 +47,6 @@ export default function App() {
       Alert.alert("Error", error.message);
     }
     setLoading(false);
-    console.log(txns);
   };
 
   return (
@@ -74,12 +73,12 @@ export default function App() {
         </View>
 
         {/* Tokens card */}
-        <View>
+        <View style={styles.tokensCard}>
           <TokensCard tokens={tokens} />
         </View>
 
         {/* Recent transactions */}
-        <View>
+        <View style={styles.transactionsCard}>
           <TransactionCard transactions={txns} />
         </View>
       </ScrollView>
@@ -94,14 +93,25 @@ const styles = StyleSheet.create({
   },
 
   scroll: {
-    marginHorizontal: 5,
+    paddingHorizontal: 5,
+    marginBottom: 32,
   },
 
   titleComponent: {},
 
-  searchComponent: {},
+  searchComponent: {
+    marginTop: -10
+  },
 
   balanceCard: {
     marginTop: 20,
+  },
+
+  tokensCard: {
+    marginTop: 5,
+  },
+
+  transactionsCard: {
+    marginTop: 5,
   },
 });
