@@ -24,7 +24,7 @@ export default Title;
 
 const styles = StyleSheet.create({
   safe: {
-    marginHorizontal: 5,
+    paddingHorizontal: 5,
   },
 
   titleContainer: {

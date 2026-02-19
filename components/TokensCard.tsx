@@ -50,9 +50,8 @@ export default TokensCard;
 
 const styles = StyleSheet.create({
   safe: {
-    // flex: 1,
     borderRadius: 12,
-    padding: 5,
+    paddingHorizontal: 5,
   },
 
   listContainer: {

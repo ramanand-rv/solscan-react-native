@@ -26,14 +26,14 @@ export default function SolBalanceCard({ balance, address }: SolBalanceProps) {
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
-    marginHorizontal: 5,
+    paddingHorizontal: 5,
     backgroundColor: "#2A2A35",
     padding: 14,
     borderRadius: 12,
   },
 
   balanceLabel: {
-    marginTop: -20,
+    marginTop: -34,
     color: "rgba(235, 235, 245, 0.6)",
     textAlign: "center",
     fontSize: 12,

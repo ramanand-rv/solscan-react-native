@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     backgroundColor: "transparent",
-    marginHorizontal: 5,
+    paddingHorizontal: 5,
   },
 
   addressSearch: {
