@@ -1,4 +1,5 @@
 const RPC = "http://api.mainnet-beta.solana.com";
+// const RPC = "http://api.devnet.solana.com";
 
 export const rpc = async (method: string, params: any[]) => {
   const res = await fetch(RPC, {

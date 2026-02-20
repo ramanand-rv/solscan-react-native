@@ -8,15 +8,13 @@ import {
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
-import { shortAddress } from "../utils/HelperFunctions";
+import { shortAddress, timeAgo } from "../utils/HelperFunctions";
 
 interface TransactionsProps {
   transactions: any;
 }
 
 const TransactionCard = ({ transactions }: TransactionsProps) => {
-  // Sort tokens by amount (highest first) and take top 3
-  //   const topTokens = [...transactions].sort((a, b) => b.amount - a.amount).slice(0, 3);
   return (
     <SafeAreaView style={styles.safe}>
       <Text style={styles.tokensHeader}>
@@ -26,20 +24,37 @@ const TransactionCard = ({ transactions }: TransactionsProps) => {
         <FlatList
           style={styles.flatList}
           data={transactions}
-          // keyExtractor={(t) => t.mint}
+          keyExtractor={(t) => t.sig}
           scrollEnabled={false}
           renderItem={({ item }) => (
-            <TouchableOpacity style={[[styles.listRow]]}>
-              <Text style={styles.mintText}>{shortAddress(item.sig, 6)}</Text>
-              <View style={styles.balanceContainer}>
-                <Text style={styles.balanceFigure}>{item.amount}</Text>
+            <TouchableOpacity
+              style={[
+                styles.listRow,
+                item.ok
+                  ? { backgroundColor: "#2A2A35" }
+                  : { backgroundColor: "#fA2A15" },
+              ]}
+            >
+              <Text style={styles.sigText}>{shortAddress(item.sig, 6)}</Text>
+              <Text style={styles.timeText}>
+                {item.time ? timeAgo(item.time) : "Pending"}
+              </Text>
+
+              {item.ok ? (
                 <Ionicons
-                  style={styles.chevronForwardIcon}
-                  name="chevron-forward"
+                  style={styles.okStatusIcon}
+                  name="checkmark"
                   size={16}
-                  color="#6B7280"
+                  color="#55ff55"
                 />
-              </View>
+              ) : (
+                <Ionicons
+                  style={styles.okStatusIcon}
+                  name="close"
+                  size={16}
+                  color="#ff5555"
+                />
+              )}
             </TouchableOpacity>
           )}
         />
@@ -52,9 +67,8 @@ export default TransactionCard;
 
 const styles = StyleSheet.create({
   safe: {
-    // flex: 1,
     borderRadius: 12,
-    padding: 5,
+    paddingHorizontal: 5,
   },
 
   listContainer: {
@@ -78,32 +92,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 18,
     paddingVertical: 10,
-    backgroundColor: "#2A2A35",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     borderWidth: 0.5,
     borderColor: "#3E3E2A",
     borderRadius: 12,
     marginVertical: 2,
   },
 
-  mintText: {
-    color: "rgba(235, 235, 245, 0.6)",
+  sigText: {
+    color: "rgba(235, 235, 245, 0.5)",
     fontSize: 12,
+    marginLeft: -38
   },
 
-  balanceContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-  },
-
-  balanceFigure: {
+  timeText: {
     color: "#14F195",
-    fontWeight: "500",
+    fontSize: 10,
   },
 
-  chevronForwardIcon: {
+  okStatusIcon: {
     fontSize: 22,
-    marginRight: -8,
+    marginRight: -34,
   },
 });
