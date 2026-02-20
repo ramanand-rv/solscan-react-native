@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
 
   timeText: {
     color: "#14F195",
-    fontSize: 10,
+    fontSize: 12,
   },
 
   okStatusIcon: {
