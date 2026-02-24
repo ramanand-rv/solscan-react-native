@@ -29,7 +29,9 @@ export default function swap() {
 
   return (
     <SafeAreaView style={styles.safe}>
-      <Title title="Swap tokens" subtitle="" />
+      <View style={styles.titleContainer}>
+        <Title title="Swap" subtitle="Trade tokens instantly" />
+      </View>
       <ScrollView style={styles.scroll}>
         {/* From card */}
         <View style={styles.fromToToken}>
@@ -125,13 +127,10 @@ const styles = StyleSheet.create({
   scroll: {
     flex: 1,
     paddingHorizontal: 10,
-    top: "14%",
+    top: "5%",
   },
 
-  title: {
-    color: "#FFFFFF",
-    fontSize: 24,
-    fontWeight: "700",
+  titleContainer: {
     paddingHorizontal: 5,
   },
 
