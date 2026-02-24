@@ -13,12 +13,12 @@ import {
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 
-import SearchCard from "../../components/SearchCard";
-import Title from "../../components/Title";
-import SolBalanceCard from "../../components/SolBalanceCard";
-import { getBalance, getTokens, getTxns } from "../../lib/sol";
-import TokensCard from "../../components/TokensCard";
-import TransactionCard from "../../components/TransactionsCard";
+import SearchCard from "../../src/components/SearchCard";
+import Title from "../../src/components/Title";
+import SolBalanceCard from "../../src/components/SolBalanceCard";
+import { getBalance, getTokens, getTxns } from "../../src/lib/sol";
+import TokensCard from "../../src/components/TokensCard";
+import TransactionCard from "../../src/components/TransactionsCard";
 
 export default function App() {
   const [address, setAddress] = useState("");
