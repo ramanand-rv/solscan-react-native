@@ -10,12 +10,13 @@ import {
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
+import Title from "../../src/components/Title";
 
 export default function swap() {
   const [fromToken, setfromToken] = useState("SOL");
   const [fromAmount, setfromAmount] = useState("0.28679");
   const [toToken, setToToken] = useState("ETH");
-  const [toAmount, setToAmount] = useState("0.4782");
+  const [toAmount, setToAmount] = useState("0.47825");
 
   // Calculate font size based on length
   const getFontSize = (isFrom: boolean) => {
@@ -28,7 +29,7 @@ export default function swap() {
 
   return (
     <SafeAreaView style={styles.safe}>
-      <Text style={styles.title}>Swap Tokens</Text>
+      <Title title="Swap tokens" subtitle="" />
       <ScrollView style={styles.scroll}>
         {/* From card */}
         <View style={styles.fromToToken}>
@@ -87,7 +88,10 @@ export default function swap() {
 
             {/* Token qty input */}
             <TextInput
-              style={[styles.fromToTokenInput, { fontSize: getFontSize(false) }]}
+              style={[
+                styles.fromToTokenInput,
+                { fontSize: getFontSize(false) },
+              ]}
               keyboardType="number-pad"
               value={toAmount}
               placeholder={"0"}
@@ -121,12 +125,14 @@ const styles = StyleSheet.create({
   scroll: {
     flex: 1,
     paddingHorizontal: 10,
+    top: "14%",
   },
 
   title: {
     color: "#FFFFFF",
     fontSize: 24,
     fontWeight: "700",
+    paddingHorizontal: 5,
   },
 
   fromToToken: {
@@ -217,7 +223,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 12,
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 28,
     marginHorizontal: 5,
   },
 });
